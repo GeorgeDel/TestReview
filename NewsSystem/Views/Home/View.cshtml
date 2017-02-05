@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "MainPage";
+}
+
+
+
+<div ng-app="App" ng-controller="ArticleController as controller">
+    <div class="panel-default" ng-show="hasResult" ng-cloak>
+        <div class="container">
+            <h2> {{UserName}} Article's</h2>
+            <button ng-show="canPubish" type="button" class="btn btn-default btn-sm" ng-click="showAddtable()">
+                <span class=" glyphicon glyphicon-new-window">
+                </span> New Article
+            </button>
+            <form name="SaveForm">
+                <div ng-show="showAdd">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Save</th>
+                            </tr>
+                        </thead>
+
+                        <tr>
+                            <td>
+                                <div ng-class="{ 'has-error' : SaveForm.title.$invalid && !SaveForm.title.$pristine,  'has-success' : SaveForm.title.$valid }">
+                                    <input type="text" id="title" ng-model="controller.data.title" name="title" required />
+                                </div>
+                            </td>
+                            <td>
+
+                                <div ng-class="{ 'has-error' : SaveForm.message.$invalid && !SaveForm.message.$pristine,  'has-success' : SaveForm.message.$valid }">
+                                    <input type="text" id="message" ng-model="controller.data.body" name=" message" required />
+                                </div>
+                            </td>
+
+                            <td>
+                                <button type="button" name="save" class="btn btn-default btn-sm" ng-disabled="SaveForm.$invalid" ng-click="saveArticle()">
+                                    <span class="glyphicon glyphicon-save"></span> Save changes
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
+        </div>
+        <div>
+            <form name="editForm">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+   
+                            <th>Title</th>
+                            <th>Message</th>
+                            <th>Publish Date</th>
+                            <th>Number Of Likes</th>
+                            <th>Delete</th>
+                            <th>Like </th>
+                            <th>Edit</th>
+                            <th>Comment</th>
+
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="atricle in output">
+                        <tr>
+                            <td>
+                                <div ng-show="readOnly"> {{atricle.Title}} </div>
+                                <div ng-show="editmode" ng-class="{ 'has-error' : editForm.title.$invalid && !editForm.title.$pristine,  'has-success' : editForm.title.$valid }">
+                                    <input type="text" ng-model="atricle.Title" name="title" required />
+                                </div>
+                            </td>
+                            <td>
+                                <div ng-show="readOnly"> {{atricle.Body}}</div>
+                                <div ng-class="{ 'has-error' : editForm.Body.$invalid && !editForm.Body.$pristine,  'has-success' : editForm.Body.$valid }" ng-show="editmode">
+                                    <input type="text" name="Body" ng-model="atricle.Body" required />
+                                </div>
+                            </td>
+                            <td>
+                                <div ng-show="readOnly">
+                                    {{atricle.PublishDate | date}}
+                                </div>
+                            </td>
+
+                            <td> {{atricle.NumberOfLikes}} </td>
+                            <td>
+                                <button type="button" ng-click="deleteArticle(atricle.ArticleId)" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span> Trash
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-sm" ng-click="likeArticle(atricle.ArticleId,atricle.UserId)">
+                                    <span class="glyphicon glyphicon-hand-up"></span> Like
+                                </button>
+                            </td>
+                            <td>
+                                <div ng-show="readOnly">
+                                    <button type="button" class="btn btn-default btn-sm" ng-click="edit()">
+                                        <span class=" glyphicon glyphicon-edit">
+                                        </span> Edit
+                                    </button>
+                                </div>
+                                <div ng-show="editmode">
+                                    <button type="button" class="btn btn-default btn-sm" ng-disabled="editForm.$invalid" ng-click="SaveUpdate(atricle)">
+                                        <span class="glyphicon glyphicon-save"></span> Save changes
+                                    </button>
+                                </div>
+                            </td>
+
+                            <td>
+
+                                <div ng-show="readOnly">
+                                    <textarea rows="4" cols="50"  ng-click="comment()">
+                                       
+                                    </textarea>
+                                </div>
+
+
+
+
+                            </td>
+
+
+
+                        </tr>
+                    <tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+

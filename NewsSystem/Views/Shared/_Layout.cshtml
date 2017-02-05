@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+      @Scripts.Render("~/bundles/angular")
+
+    <script src="~/Scripts/Angular/App.js"></script>
+    <script src="~/Scripts/Angular/angular-local-storage.js"></script>
+    <script src="~/Scripts/Angular/Controller.js"></script>
+    <script src="~/Scripts/Angular/loginService.js"></script>
+    <script src="~/Scripts/Angular/ArticleService.js"></script>
+    <script src="~/Scripts/Angular/ArticleController.js"></script>
+
+    <script src="~/Scripts/Angular/DeleteService.js"></script>
+    <script src="~/Scripts/Angular/LikeService.js"></script>
+    <script src="~/Scripts/Angular/SaveService.js"></script>
+    <script src="~/Scripts/Angular/UpdateService.js"></script>
+  
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+            </div>
+            <div class="navbar-collapse collapse">
+            
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

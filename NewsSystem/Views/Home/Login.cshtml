@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Hello, please enter your login details:</h2>
+<form name="userForm" ng-app="App" ng-controller="loginController as controller" novalidate>
+    <fieldset class="form-group">
+
+        <div class="form-group" ng-class="{ 'has-error' : userForm.UserName.$invalid && !userForm.UserName.$pristine, 'has-success' : userForm.UserName.$valid   }">
+            <label for="UserName">User Name</label>
+            <input type="text" name="UserName" class="form-control" ng-model="controller.data.UserName" placeholder="Enter User Name" required>
+            <p ng-show="userForm.UserName.$invalid && !userForm.UserName.$pristine" class="help-block">You name is required.</p>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="form-group">
+        <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine,  'has-success' : userForm.password.$valid }">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" ng-model="controller.data.password" name="password" placeholder="Password" required>
+            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">Please eneter a password.</p>
+        </div>
+    </fieldset>
+    <div>
+    </div>
+
+    <div ng-show="hasResult" ng-cloak>
+       Password Ok
+    </div>
+
+    <div ng-show="hasError"  ng-cloak>
+        <div class="alert alert-danger" role="alert" ng-cloak>
+            {{errorMessage}}
+            </div>
+        </div>
+
+    <button type="submit" ng-click="controller.getNumbers()" ng-disabled="userForm.$invalid" class="btn btn-primary">Submit</button>
+</form>
